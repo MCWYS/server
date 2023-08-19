@@ -1,22 +1,17 @@
 const hre = require("hardhat");
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const unlockTime = currentTimestampInSeconds + 60;
+  const nftFactory= await ethers.getContractFactory("ShoesNFT");
 
-  const lockedAmount = hre.ethers.parseEther("0.001");
+  const nft = await nftFactory.deploy();
 
-  const lock = await hre.ethers.deployContract("Lock", [unlockTime], {
-    value: lockedAmount,
-  });
+  const ctrt_addr = nft.target;
+  
+  console.log("[+] Contract address:", ctrt_addr);
 
-  await lock.waitForDeployment();
-
-  console.log(
-    `Lock with ${ethers.formatEther(
-      lockedAmount
-    )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.target}`
-  );
+  // await MyToken.mint(deployer.address, 50);
+  // let owner_balance = await MyToken.balanceOf(deployer.address);
+  // console.log("owner_balance: ", owner_balance);
 }
 
 main().catch((error) => {

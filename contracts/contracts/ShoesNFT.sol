@@ -1,5 +1,3 @@
-
-
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
@@ -45,14 +43,12 @@ contract ShoesNFT is ERC721Enumerable {
       uint256 price,
       uint256 point_ratio,
       uint256 mileage_ratio,
-      string memory tokenImageURI) public {
+      string memory tokenImageURI) public returns (uint256){
         _tokenIdCounter.increment();
 
         uint256 newTokenId = _tokenIdCounter.current();
 
         _safeMint(msg.sender, newTokenId);
-
-
 
         _tokenMetadata[newTokenId] = NFTMetadata(price, point_ratio, mileage_ratio, tokenImageURI);
 
@@ -61,6 +57,8 @@ contract ShoesNFT is ERC721Enumerable {
         bytes32 tokenHash = computeTokenHash(nonce, tokenImageURI);
 
         _tokenHashes[newTokenId] = tokenHash;
+
+        return newTokenId;
     }
 
     // getter, attribute
