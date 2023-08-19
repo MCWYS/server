@@ -98,6 +98,7 @@ describe("ShoesNFT", function() {
                 name: item.name, // 현재 데이터에 신발의 이름에 대한 정보가 없기 때문에 임시로 imageURI를 이름으로 사용했습니다.
                 mps: item[2].toString(), // BigNumber 값을 문자열로 변환
                 pps: item[1].toString(),  // BigNumber 값을 문자열로 변환
+                price: item[3].toString(),
                 imageURI: item.imageURI, // 현재 데이터에 신발의 이름에 대한 정보가 없기 때문에 임시로 imageURI를 이름으로 사용했습니다.
               }));
 
