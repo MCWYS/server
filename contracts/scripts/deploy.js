@@ -10,6 +10,8 @@ async function main() {
   const ctrt_addr = nft.address;
   
   console.log("[+] Contract address:", ctrt_addr);
+
+  await nft.mint(owner.address, "Watermelon", 10, 100, 100, "0");
 }
 
 main().catch((error) => {
