@@ -5,13 +5,9 @@ async function main() {
 
   const nft = await nftFactory.deploy();
 
-  const ctrt_addr = nft.target;
+  const ctrt_addr = nft.address;
   
   console.log("[+] Contract address:", ctrt_addr);
-
-  // await MyToken.mint(deployer.address, 50);
-  // let owner_balance = await MyToken.balanceOf(deployer.address);
-  // console.log("owner_balance: ", owner_balance);
 }
 
 main().catch((error) => {
