@@ -17,26 +17,26 @@ describe("ShoesNFT", function() {
 
     describe("Minting, querying and metadata", function() {
         it("Should mint a new NFT with metadata", async function() {
-            await shoesNFT.connect(owner).mint(10, 100, 100, "testImageURI");
+            await shoesNFT.connect(owner).mint(ownerAddress, 10, 100, 100, "testImageURI");
             const tokenOwner = await shoesNFT.ownerOf(1);
             expect(tokenOwner).to.equal(ownerAddress);
 
-            const tokenPrice= await shoesNFT.getTokenPrice(1);
-            expect(tokenPrice).to.equal("10");
+            const tokenPrice = await shoesNFT.getTokenPrice(1);
+            expect(tokenPrice.toString()).to.equal("10");
 
             const tokenPointRatio = await shoesNFT.getTokenPointRatio(1);
-            expect(tokenPointRatio).to.equal("100");
+            expect(tokenPointRatio.toString()).to.equal("100");
 
             const tokenMileageRatio = await shoesNFT.getTokenMileageRatio(1);
-            expect(tokenMileageRatio).to.equal("100");
+            expect(tokenMileageRatio.toString()).to.equal("100");
 
             const tokenImageURI = await shoesNFT.getTokenImageURI(1);
             expect(tokenImageURI).to.equal("testImageURI");
         });
 
         it("Should return tokens of owner", async function() {
-            await shoesNFT.connect(owner).mint(10, 100, 100, "testImageURI1");
-            await shoesNFT.connect(owner).mint(20, 200, 200, "testImageURI2");
+            await shoesNFT.connect(owner).mint(ownerAddress, 10, 100, 100, "testImageURI1");
+            await shoesNFT.connect(owner).mint(ownerAddress, 20, 200, 200, "testImageURI2");
             
             const ownerTokens = await shoesNFT.tokensOfOwner(ownerAddress);
             const addr1Tokens = await shoesNFT.tokensOfOwner(addr1Address);
@@ -46,35 +46,35 @@ describe("ShoesNFT", function() {
         });
 
         it("Should return token hash", async function() {
-            await shoesNFT.connect(owner).mint(10, 100, 100, "testImageURI1");
+            await shoesNFT.connect(owner).mint(ownerAddress, 10, 100, 100, "testImageURI1");
             const tokenHash = await shoesNFT.getTokenHash(1);
             expect(tokenHash).to.equal("0x27dff494b308b8f8b49e2d87e4f22a0e507f586e88ad67180098f672ce6a7d5a");
         });
         
         it("Should return correct metadata for tokens", async function() {
-            await shoesNFT.connect(owner).mint(10, 100, 100, "testImageURI1");
-            await shoesNFT.connect(owner).mint(20, 200, 200, "testImageURI2");
+            await shoesNFT.connect(owner).mint(ownerAddress, 10, 100, 100, "testImageURI1");
+            await shoesNFT.connect(owner).mint(ownerAddress, 20, 200, 200, "testImageURI2");
 
             const token1Price = await shoesNFT.getTokenPrice(1);
-            expect(token1Price).to.equal("10");
+            expect(token1Price.toString()).to.equal("10");
 
             const token1PointRatio = await shoesNFT.getTokenPointRatio(1);
-            expect(token1PointRatio).to.equal("100");
+            expect(token1PointRatio.toString()).to.equal("100");
 
             const token1MileageRatio = await shoesNFT.getTokenMileageRatio(1);
-            expect(token1MileageRatio).to.equal("100");
+            expect(token1MileageRatio.toString()).to.equal("100");
 
             const token1ImageURI = await shoesNFT.getTokenImageURI(1);
             expect(token1ImageURI).to.equal("testImageURI1");
 
             const token2Price= await shoesNFT.getTokenPrice(2);
-            expect(token2Price).to.equal("20");
+            expect(token2Price.toString()).to.equal("20");
 
             const token2PointRatio = await shoesNFT.getTokenPointRatio(2);
-            expect(token2PointRatio).to.equal("200");
+            expect(token2PointRatio.toString()).to.equal("200");
 
             const token2MileageRatio = await shoesNFT.getTokenMileageRatio(2);
-            expect(token2MileageRatio).to.equal("200");
+            expect(token2MileageRatio.toString()).to.equal("200");
 
             const token2ImageURI = await shoesNFT.getTokenImageURI(2);
             expect(token2ImageURI).to.equal("testImageURI2");

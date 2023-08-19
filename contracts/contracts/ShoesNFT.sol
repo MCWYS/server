@@ -40,6 +40,7 @@ contract ShoesNFT is ERC721Enumerable {
     // token 을 mint 합니다.
     function mint(
       // string memory tokenAttribute, 
+      address to,
       uint256 price,
       uint256 point_ratio,
       uint256 mileage_ratio,
@@ -48,7 +49,7 @@ contract ShoesNFT is ERC721Enumerable {
 
         uint256 newTokenId = _tokenIdCounter.current();
 
-        _safeMint(msg.sender, newTokenId);
+        _safeMint(to, newTokenId);
 
         _tokenMetadata[newTokenId] = NFTMetadata(price, point_ratio, mileage_ratio, tokenImageURI);
 
